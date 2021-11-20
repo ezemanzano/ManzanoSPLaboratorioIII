@@ -132,9 +132,13 @@ function agregarCliente() {
       id = persona.id;
     }
   });
-  var newCliente = new Cliente(id + 1, nombre, apellido, edad, sexo);
-  personas.push(newCliente);
-  llenarTabla(personas);
+  if (nombre != "" && apellido != "" && sexo != "" && edad != "") {
+    var newCliente = new Cliente(id + 1, nombre, apellido, edad, sexo);
+    personas.push(newCliente);
+    llenarTabla(personas);
+  } else {
+    alert("Debe completar todos los campos");
+  }
 }
 
 function cleanData() {
@@ -174,7 +178,8 @@ function eliminarPersona() {
 }
 
 function calcularPromedio() {
-  var total = personas.reduce((sum, li) => sum + li.edad, 0);
+  var total = 0;
+  total = personas.reduce((sum, per) => sum + parseInt(per.edad), 0);
   total = total / personas.length;
   document.getElementById("prom").value = total;
 }
